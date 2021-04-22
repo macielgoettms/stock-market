@@ -7,7 +7,9 @@ import { AppTopbar } from './components/AppTopbar';
 import { AppFooter } from './components/AppFooter';
 import { AppMenu } from './components/AppMenu';
 
-import MainPage from './pages/MainPage/index.jsx';
+import MarketPage from './pages/MarketPage/index.jsx';
+import MarketDetailPage from './pages/MarketDetailPage/index.jsx';
+import TodoPage from './pages/TodoPage/index.jsx';
 import { EmptyPage } from './pages/EmptyPage';
 import { AppConfig } from './components/AppConfig';
 
@@ -102,7 +104,8 @@ const App = () => {
     }
 
     const menu = [
-        { label: 'Main', icon: 'pi pi-fw pi-home', to: '/' },
+        { label: 'Market', icon: 'pi pi-fw pi-wallet', to: '/market' },
+        { label: 'Todo', icon: 'pi pi-fw pi-check-circle', to: '/todo' },
     ];
 
     const addClass = (element, className) => {
@@ -136,7 +139,7 @@ const App = () => {
         return true;
     }
 
-    const logo = 'assets/layout/images/logo.svg';
+    const logo = 'assets/layout/images/logo.png';
 
     const wrapperClass = classNames('layout-wrapper', {
         'layout-overlay': layoutMode === 'overlay',
@@ -164,8 +167,8 @@ const App = () => {
                 unmountOnExit
             >
                 <div ref={sidebar} className={sidebarClassName} onClick={onSidebarClick}>
-                    <div className="layout-logo" style={{ cursor: 'pointer' }} onClick={() => history.push('/')}>
-                        <img alt="Logo" src={logo} color="#fff" height="100" />
+                    <div className="layout-logo">
+                        <img alt="Logo" src={logo} color="#fff" width="220px" />
                     </div>
                     <AppMenu
                         model={menu}
@@ -174,7 +177,7 @@ const App = () => {
                 </div>
             </CSSTransition>
 
-            <AppConfig
+           {/* <AppConfig
                 rippleEffect={ripple}
                 onRippleEffect={onRipple}
                 inputStyle={inputStyle}
@@ -183,11 +186,13 @@ const App = () => {
                 onLayoutModeChange={onLayoutModeChange}
                 layoutColorMode={layoutColorMode}
                 onColorModeChange={onColorModeChange}
-            />
+           /> */}
 
             <div className="layout-main">
-                <Route path="/" exact component={MainPage} />
-                <Route path="/empty" exact component={EmptyPage} />
+                <Route path="/market" exact component={MarketPage} />
+                <Route path="/market/company" exact component={MarketDetailPage} />
+                <Route path="/empty" exact component={EmptyPage} />                
+                <Route path="/todo" exact component={TodoPage} />
             </div>
 
             <AppFooter />
